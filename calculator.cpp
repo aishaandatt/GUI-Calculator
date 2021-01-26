@@ -7,19 +7,19 @@ bool multTrigger = false;
 bool addTrigger = false;
 bool subTrigger = false;
 
-Calculator::Calculator(QWidget *parent) //constructor
+Calculator::Calculator(QWidget *parent) 
     : QMainWindow(parent)
-    , ui(new Ui::Calculator) //create ui class and assign it to ui member
+    , ui(new Ui::Calculator) 
 {
     ui->setupUi(this);
 
-    ui->Display->setText(QString::number(calcVal));  //typecast from qstring to double
+    ui->Display->setText(QString::number(calcVal));  
     QPushButton *numButtons[10]; //refrence to all buttons 0 to 9
     for(int i=0;i<10;i++)
     {
         QString butName = "Button" + QString::number(i);
-        numButtons[i]=Calculator::findChild<QPushButton *>(butName); //earching a widget by providing a name
-        connect(numButtons[i], SIGNAL(released()),this, //to call function buttonpressed whenever a button is released
+        numButtons[i]=Calculator::findChild<QPushButton *>(butName); 
+        connect(numButtons[i], SIGNAL(released()),this, 
                 SLOT(NumPressed()));
 
     }
@@ -52,7 +52,7 @@ Calculator::~Calculator()
 //destructor
 
 void Calculator::NumPressed(){
-    QPushButton *button =(QPushButton *)sender(); //sender is going to return a pointer to the button that was presssed
+    QPushButton *button =(QPushButton *)sender(); 
     QString butVal= button->text(); //to fetch the number that was on the button
     QString displayVal=ui->Display->text(); //to get the value in our display
     if((displayVal.toDouble()==0) || (displayVal.toDouble()==0.0 ))
@@ -79,7 +79,7 @@ void Calculator::MathButtonPressed(){
     calcVal=displayVal.toDouble();
     QPushButton *button = (QPushButton *)sender(); //to find out what math button was acutally clicked on
     QString butVal=button->text(); //get the math symbol on the button
-    //to see which button is clicked on
+    //to see which button is clicked 
     if(QString::compare(butVal,"/",Qt::CaseInsensitive)==0)
     {
         divTrigger = true;
@@ -129,7 +129,7 @@ void Calculator::EqualButtonPressed()
 void Calculator::ChangeNumberSign()
 {
     QString displayVal= ui->Display->text();
-    //reg ex check to check if the text inside is a number
+    //reg ex check to check if the text inside is actually a number
     QRegExp reg("[-]?[0-9.]*");
     if(reg.exactMatch(displayVal)){
         double dblDisplayVal = displayVal.toDouble();
