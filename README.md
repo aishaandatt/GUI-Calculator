@@ -1,1 +1,1 @@
-# GUI-Calculator-Qt-C-
+# GUI-Calculator-Qt-Cpp
